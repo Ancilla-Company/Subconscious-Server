@@ -24,7 +24,6 @@ RUN python -m venv /venv && \
 COPY app/ /build/app/
 COPY migrations/ /build/migrations/
 COPY alembic.ini /build/alembic.ini
-COPY run.py /build/run.py
 
 # ── Stage 2: Standard runtime (slim) ───────────────────────────────────────────
 FROM python:3.12-slim-bookworm AS runtime

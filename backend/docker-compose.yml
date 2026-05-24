@@ -1,4 +1,4 @@
-name: subconcious_website
+name: subconcious_server
 
 services:
   # ── API ──────────────────────────────────────────────────────────────────────
