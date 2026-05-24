@@ -32,13 +32,16 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set lowercase image name
+        run: echo "IMAGE=ghcr.io/$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')/subconscious-prod:${{ github.sha }}" >> $GITHUB_ENV
+
       - name: Build and push image to GHCR
         uses: docker/build-push-action@v5
         with:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/subconscious-prod:${{ github.sha }}
+          tags: ${{ env.IMAGE }}
 
       - name: Azure Login
         uses: azure/login@v2
@@ -52,6 +55,6 @@ jobs:
         with:
           containerAppName: subconscious-prod
           resourceGroup: subconscious-prod
-          imageToDeploy: ghcr.io/${{ github.repository_owner }}/subconscious-prod:${{ github.sha }}
+          imageToDeploy: ${{ env.IMAGE }}
 
 
