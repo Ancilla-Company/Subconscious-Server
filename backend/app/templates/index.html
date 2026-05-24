@@ -1,0 +1,349 @@
+{% extends "base.html" %}
+
+{% block head_extra %}
+<style>
+  #neural-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<main>
+  <!-- ── Hero ─────────────────────────────────────────────────────────────── -->
+  <section class="relative min-h-screen bg-black flex flex-col items-center justify-center pt-28 pb-24 overflow-hidden">
+
+    <!-- Animated neural network canvas -->
+    <canvas id="neural-canvas"></canvas>
+
+    <!-- Content -->
+    <div class="relative z-10 text-center px-8 max-w-5xl w-full">
+      <span class="inline-block text-[0.6875rem] font-mono text-neutral-500 tracking-[0.3em] uppercase mb-6">v0.1.9
+        &mdash; Open Source</span>
+
+      <h1 class="text-[5.5rem] md:text-[9rem] font-black text-white leading-none tracking-tighter mb-5 lowercase">
+        subconscious</h1>
+
+      <p class="text-xl md:text-2xl text-neutral-300 font-medium tracking-tight mb-3 max-w-3xl mx-auto leading-snug">
+        A distributed, agentic AI platform.<br class="hidden md:block" />
+        Run AI agents everywhere — on all your connected devices.
+      </p>
+      <p class="text-sm text-neutral-600 font-mono mb-12">
+        Open-source alternative to ChatGPT, Claude &amp; Grok &mdash; packaged alternative to Open WebUI
+      </p>
+
+      <!-- Primary CTAs -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+        <a href="https://github.com/Ancilla-Company/Subconscious/releases/latest"
+          class="bg-white text-black px-10 py-4 rounded-lg font-bold text-lg hover:bg-neutral-200 transition-colors w-full sm:w-auto flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined" style="font-size:20px">download</span>
+          Download for Windows
+        </a>
+        <a href="https://github.com/Ancilla-Company/Subconscious"
+          class="text-white border border-white/20 px-10 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition-colors w-full sm:w-auto flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined" style="font-size:20px">code</span>
+          View on GitHub
+        </a>
+      </div>
+
+      <!-- pip install snippet -->
+      <div
+        class="inline-flex items-center gap-3 bg-white/5 border border-white/10 rounded-lg px-6 py-3 font-mono text-sm text-neutral-400">
+        <span class="text-neutral-600 select-none">$</span>
+        <span>pip install -U subconscious-chat</span>
+        <button onclick="navigator.clipboard.writeText('pip install -U subconscious-chat')"
+          class="text-neutral-600 hover:text-white transition-colors" title="Copy to clipboard">
+          <span class="material-symbols-outlined" style="font-size:16px">content_copy</span>
+        </button>
+      </div>
+      <p class="text-xs text-neutral-700 font-mono mt-3">
+        or: <span class="text-neutral-500">winget install Ancilla.Subconscious-Chat</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Feature Bento Grid ──────────────────────────────────────────────── -->
+  <section class="py-32 px-8 bg-background max-w-[1440px] mx-auto">
+    <div class="mb-24 space-y-4">
+      <span class="text-secondary text-[0.6875rem] uppercase tracking-[0.2em] font-bold">Features</span>
+      <h2 class="text-5xl font-black tracking-tighter text-primary max-w-2xl">distributed by design, agentic by nature.
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+      <!-- Local-First -->
+      <div class="md:col-span-4 bg-primary text-on-primary p-12 rounded-xl flex flex-col justify-between">
+        <div>
+          <span class="material-symbols-outlined text-4xl mb-6">lock</span>
+          <h3 class="text-3xl font-bold tracking-tight mb-4">Local-First</h3>
+          <p class="text-on-primary/60 leading-relaxed">Your data is exclusively yours. All chats, logs, and settings
+            are stored locally. Privacy isn't a feature — it's the foundation.</p>
+        </div>
+        <div class="mt-8 pt-8 border-t border-white/10">
+          <p class="text-xs font-mono opacity-40">DATA: ON-DEVICE ONLY<br />SYNC: P2P DISTRIBUTED</p>
+        </div>
+      </div>
+
+      <!-- Run Local Models -->
+      <div class="md:col-span-8 bg-surface-container-low p-12 rounded-xl flex flex-col justify-between group">
+        <div class="max-w-lg">
+          <span
+            class="material-symbols-outlined text-4xl mb-6 group-hover:scale-110 transition-transform">computer</span>
+          <h3 class="text-3xl font-bold tracking-tight mb-4">Run Local Models</h3>
+          <p class="text-secondary leading-relaxed">Execute models completely offline using powerful local servers like
+            Ollama. Bring your own API keys (BYOK) for OpenAI, Anthropic, Google, DeepSeek, Groq, Grok, Hugging Face and
+            more — completely offline or cloud, your choice.</p>
+        </div>
+        <!-- Model pill list -->
+        <div class="mt-10 flex flex-wrap gap-2">
+          {% for m in ["Ollama", "OpenAI", "Anthropic", "Gemini", "DeepSeek", "Mistral", "Groq", "Grok", "Hugging Face"]
+          %}
+          <span
+            class="bg-surface-container text-on-surface text-xs font-mono px-3 py-1 rounded-full border border-outline-variant">{{
+            m }}</span>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Built-in Tools -->
+      <div class="md:col-span-8 bg-surface-container-lowest p-12 rounded-xl flex flex-col group">
+        <span class="material-symbols-outlined text-4xl mb-6">build</span>
+        <h3 class="text-3xl font-bold tracking-tight mb-4">Built-in Tools, Out-of-the-Box</h3>
+        <p class="text-secondary leading-relaxed mb-8">Just ask your Subconscious what it can do. Manage tool access
+          natively inside settings.</p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-auto">
+          {% for tool in ["Terminal", "FileSystem", "Calculator", "Clipboard", "Contacts", "Time", "Weather", "Web
+          Tools"] %}
+          <div class="flex items-center gap-2 bg-surface-container px-3 py-2 rounded-lg">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0"></span>
+            <span class="text-xs font-medium text-on-surface">{{ tool }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Agentic Threads -->
+      <div class="md:col-span-4 bg-surface-container-high p-12 rounded-xl flex flex-col">
+        <span class="material-symbols-outlined text-4xl mb-6">account_tree</span>
+        <h3 class="text-3xl font-bold tracking-tight mb-4">Agentic Threads</h3>
+        <p class="text-secondary leading-relaxed">Create varied threads and agents for distinct purposes. Assign
+          specific tools and fine-tune context effortlessly per thread.</p>
+      </div>
+
+      <!-- Workspaces -->
+      <div class="md:col-span-4 bg-surface-container p-12 rounded-xl flex flex-col">
+        <span class="material-symbols-outlined text-4xl mb-6">folder_open</span>
+        <h3 class="text-3xl font-bold tracking-tight mb-4">Workspaces</h3>
+        <p class="text-secondary leading-relaxed">Keep organized. Compartmentalize threads by workspace for related
+          themes — Work, Personal, or any side-project.</p>
+      </div>
+
+      <!-- To-Dos & Scheduled Tasks -->
+      <div class="md:col-span-4 bg-surface-container-low p-12 rounded-xl flex flex-col">
+        <span class="material-symbols-outlined text-4xl mb-6">schedule</span>
+        <h3 class="text-3xl font-bold tracking-tight mb-4">To-Dos &amp; Scheduled Tasks</h3>
+        <p class="text-secondary leading-relaxed">Delegate routine chores. Let your agent maintain a to-do list or
+          schedule tasks for exact execution times.</p>
+      </div>
+
+      <!-- Multi-Platform -->
+      <div class="md:col-span-4 bg-surface-container-lowest p-12 rounded-xl flex flex-col">
+        <span class="material-symbols-outlined text-4xl mb-6">devices</span>
+        <h3 class="text-3xl font-bold tracking-tight mb-4">True Multi-Platform</h3>
+        <p class="text-secondary leading-relaxed">Works via Python and Windows executables out-of-the-box. Web, Linux,
+          macOS, Android, and iOS actively coming soon.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Philosophy ──────────────────────────────────────────────────────── -->
+  <section class="py-32 px-8 bg-surface-container-low overflow-hidden">
+    <div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+      <div class="relative">
+        <div
+          class="absolute -top-12 -left-12 text-[15rem] font-black text-black/5 leading-none select-none pointer-events-none">
+          S</div>
+        <h2 class="text-6xl font-black tracking-tighter leading-none mb-12 relative z-10">Beyond the application.</h2>
+        <p class="text-xl text-secondary mb-8 leading-relaxed max-w-lg">
+          Subconscious is designed to be as ubiquitous as you are. Start on one device and continue from another — begin
+          a task in your browser and seamlessly transition to your phone.
+        </p>
+        <p class="text-xl text-secondary leading-relaxed max-w-lg">
+          An open-source, community-driven alternative to closed AI platforms — fully extensible with your own custom
+          tools and Python integrations.
+        </p>
+      </div>
+
+      <div class="glass-panel rounded-2xl shadow-xl p-12">
+        <span class="text-[0.6875rem] text-primary font-black tracking-widest block mb-8 uppercase">Core Values</span>
+        <ul class="space-y-6">
+          <li class="flex items-start gap-4">
+            <span class="w-1.5 h-1.5 bg-primary mt-2 flex-shrink-0 rounded-full"></span>
+            <div>
+              <span class="font-bold tracking-tight block">Sovereign Data</span>
+              <span class="text-secondary text-sm">Everything local — nothing phoned home</span>
+            </div>
+          </li>
+          <li class="flex items-start gap-4">
+            <span class="w-1.5 h-1.5 bg-primary mt-2 flex-shrink-0 rounded-full"></span>
+            <div>
+              <span class="font-bold tracking-tight block">Agentic Automation</span>
+              <span class="text-secondary text-sm">Threads, tools, schedules — agents that act</span>
+            </div>
+          </li>
+          <li class="flex items-start gap-4">
+            <span class="w-1.5 h-1.5 bg-primary mt-2 flex-shrink-0 rounded-full"></span>
+            <div>
+              <span class="font-bold tracking-tight block">Distributed Swarm</span>
+              <span class="text-secondary text-sm">One instance on every device you own</span>
+            </div>
+          </li>
+          <li class="flex items-start gap-4">
+            <span class="w-1.5 h-1.5 bg-primary mt-2 flex-shrink-0 rounded-full"></span>
+            <div>
+              <span class="font-bold tracking-tight block">Open Source</span>
+              <span class="text-secondary text-sm">BSD-3-Clause — fork it, extend it, own it</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Bottom CTA ──────────────────────────────────────────────────────── -->
+  <section class="py-48 px-8 bg-black flex flex-col items-center text-center relative overflow-hidden">
+    <div class="absolute inset-0 neural-bg opacity-20 pointer-events-none"></div>
+    <div class="relative z-10">
+      <h2 class="text-7xl md:text-8xl font-black tracking-tighter text-white mb-6 lowercase">start
+        your<br />subconscious.</h2>
+      <p class="text-neutral-500 mb-12 font-mono text-sm">v0.1.9 &mdash; 100% Open Source &mdash; MIT-style License</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="https://github.com/Ancilla-Company/Subconscious/releases/latest"
+          class="bg-white text-black px-12 py-5 rounded-lg font-black text-xl hover:bg-neutral-200 transition-colors flex items-center gap-3">
+          <span class="material-symbols-outlined">download</span>
+          Download for Windows
+        </a>
+        <a href="https://pypi.org/project/subconscious-chat/"
+          class="border border-white/20 text-white px-12 py-5 rounded-lg font-black text-xl hover:bg-white/10 transition-colors font-mono">
+          pip install subconscious-chat
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  (function () {
+    const canvas = document.getElementById('neural-canvas');
+    const ctx = canvas.getContext('2d');
+    const NODE_COUNT = 75;
+    const MAX_DIST = 170;
+    const PULSE_INTERVAL_MS = 280;
+    let nodes = [], raf;
+
+    function resize() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+
+    function makeNodes() {
+      nodes = Array.from({ length: NODE_COUNT }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: (Math.random() - 0.5) * 0.25,
+        r: Math.random() * 1.5 + 0.8,
+        pulses: []
+      }));
+    }
+
+    function spawnPulse() {
+      const a = nodes[Math.floor(Math.random() * nodes.length)];
+      const neighbors = nodes.filter(b => b !== a && Math.hypot(a.x - b.x, a.y - b.y) < MAX_DIST);
+      if (!neighbors.length) return;
+      const b = neighbors[Math.floor(Math.random() * neighbors.length)];
+      a.pulses.push({ target: b, t: 0, speed: 0.008 + Math.random() * 0.006 });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Edges
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < MAX_DIST) {
+            ctx.strokeStyle = `rgba(255,255,255,${(1 - d / MAX_DIST) * 0.12})`;
+            ctx.lineWidth = 0.6;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Nodes + pulses + movement
+      for (const n of nodes) {
+        // Glow
+        const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 5);
+        g.addColorStop(0, 'rgba(255,255,255,0.5)');
+        g.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r * 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Core dot
+        ctx.fillStyle = 'rgba(255,255,255,0.75)';
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Traveling pulses
+        n.pulses = n.pulses.filter(p => {
+          p.t += p.speed;
+          if (p.t >= 1) return false;
+          const px = n.x + (p.target.x - n.x) * p.t;
+          const py = n.y + (p.target.y - n.y) * p.t;
+          ctx.fillStyle = 'rgba(255,255,255,0.95)';
+          ctx.beginPath();
+          ctx.arc(px, py, 2.2, 0, Math.PI * 2);
+          ctx.fill();
+          return true;
+        });
+
+        // Drift
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+      }
+
+      raf = requestAnimationFrame(draw);
+    }
+
+    function init() {
+      resize();
+      makeNodes();
+      draw();
+      setInterval(spawnPulse, PULSE_INTERVAL_MS);
+    }
+
+    window.addEventListener('resize', () => {
+      cancelAnimationFrame(raf);
+      resize();
+      makeNodes();
+      draw();
+    });
+
+    init();
+  })();
+</script>
+{% endblock %}

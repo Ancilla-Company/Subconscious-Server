@@ -1,0 +1,43 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    // ── Docker: Build image ───────────────────────────────────────────────────
+    {
+      "label": "Docker: Build",
+      "type": "shell",
+      "command": "docker build --target runtime -t subconscious-api:dev .",
+      "options": { "cwd": "${workspaceFolder}/backend" },
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": { "reveal": "always", "panel": "shared" },
+      "problemMatcher": []
+    },
+
+    // ── Docker: Compose up (build + start) ───────────────────────────────────
+    {
+      "label": "Docker: Compose Up",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "compose",
+        "up",
+        "--build",
+        "--remove-orphans",
+        "--force-recreate",
+        "-d"
+      ],
+      "options": { "cwd": "${workspaceFolder}/backend" },
+      "presentation": { "reveal": "always", "panel": "shared" },
+      "problemMatcher": []
+    },
+
+    // ── Docker: Compose down ─────────────────────────────────────────────────
+    {
+      "label": "Docker: Compose Down",
+      "type": "shell",
+      "command": "docker compose down",
+      "options": { "cwd": "${workspaceFolder}/backend" },
+      "presentation": { "reveal": "always", "panel": "shared" },
+      "problemMatcher": []
+    }
+  ]
+}

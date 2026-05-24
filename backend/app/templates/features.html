@@ -1,0 +1,276 @@
+{% extends "base.html" %}
+
+{% block title %}subconscious — Features & Roadmap{% endblock %}
+
+{% block content %}
+<main class="pt-32 pb-24">
+
+  <!-- ── Hero ──────────────────────────────────────────────────────────────── -->
+  <header class="px-8 max-w-[1440px] mx-auto mb-32">
+    <span class="text-[0.6875rem] font-mono text-neutral-400 tracking-[0.3em] uppercase mb-6 block">v0.1.9 — Shipping
+      Fast</span>
+    <h1 class="text-[3.5rem] font-black tracking-tighter leading-tight mb-8">
+      Built for absolute<br />sovereignty.
+    </h1>
+    <p class="max-w-2xl text-secondary text-lg leading-relaxed">
+      Run local models, own your data, and connect agents across every device you own. Subconscious is an open-source
+      alternative to ChatGPT, Claude, and Grok — and a packaged alternative to Open WebUI.
+    </p>
+  </header>
+
+  <!-- ── Feature: Local-First ───────────────────────────────────────────── -->
+  <section class="px-8 max-w-[1440px] mx-auto mb-40">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+      <div class="md:col-span-5">
+        <span class="text-[0.6875rem] uppercase tracking-[0.05em] text-neutral-400 block mb-6 font-bold">Core
+          Architecture</span>
+        <h2 class="text-[2rem] font-bold mb-6">Local-First.<br />Zero Telemetry.</h2>
+        <p class="text-secondary leading-relaxed mb-8">
+          Your data is exclusively yours. All chats, logs, and settings are stored locally on your device. No
+          centralized authority, no telemetry, no data leaving your machine without your explicit consent.
+        </p>
+        <div class="space-y-4">
+          <div class="p-6 bg-surface-container-low rounded-lg flex gap-4">
+            <span class="material-symbols-outlined text-2xl mt-0.5 flex-shrink-0">wifi_off</span>
+            <div>
+              <h3 class="font-bold mb-1">Fully Offline</h3>
+              <p class="text-sm text-secondary">Run local models via Ollama with zero internet requirement.</p>
+            </div>
+          </div>
+          <div class="p-6 bg-surface-container-low rounded-lg flex gap-4">
+            <span class="material-symbols-outlined text-2xl mt-0.5 flex-shrink-0">key</span>
+            <div>
+              <h3 class="font-bold mb-1">Bring Your Own Keys (BYOK)</h3>
+              <p class="text-sm text-secondary">Connect cloud models using your own API keys. No intermediary, no
+                markup.</p>
+            </div>
+          </div>
+          <div class="p-6 bg-surface-container-low rounded-lg flex gap-4">
+            <span class="material-symbols-outlined text-2xl mt-0.5 flex-shrink-0">refresh</span>
+            <div>
+              <h3 class="font-bold mb-1">Auto-Updates</h3>
+              <p class="text-sm text-secondary">Subconscious checks for the latest features automatically — one-button
+                seamless update.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Model support grid -->
+      <div class="md:col-span-7 bg-surface-container-low p-10 rounded-xl">
+        <p class="text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-neutral-400 mb-6">Supported Models</p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          {% for provider, detail in [
+          ("Ollama", "100% Offline — Llama 3, Phi, Mistral"),
+          ("OpenAI", "GPT-4o, o3, and more"),
+          ("Anthropic", "Claude 3.5 Sonnet / Opus"),
+          ("Google GenAI", "Gemini 1.5 / 2.0 Flash"),
+          ("DeepSeek", "DeepSeek-V3 / R1"),
+          ("Mistral", "Mistral Large / Codestral"),
+          ("Groq", "Ultra-fast inference"),
+          ("Grok", "xAI Grok-2"),
+          ("Hugging Face", "Open model hub")
+          ] %}
+          <div class="bg-surface-container-lowest border border-outline-variant/40 rounded-lg p-4">
+            <p class="font-bold text-sm mb-1">{{ provider }}</p>
+            <p class="text-xs text-secondary leading-snug">{{ detail }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Feature: Tools ──────────────────────────────────────────────────── -->
+  <section class="bg-surface-container-low py-32 mb-40">
+    <div class="px-8 max-w-[1440px] mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+        <div>
+          <span class="text-[0.6875rem] uppercase tracking-[0.05em] text-neutral-400 block mb-6 font-bold">Built-in
+            Tools</span>
+          <h2 class="text-[2rem] font-bold mb-6">Ask what it can do.<br />It probably can.</h2>
+          <p class="text-secondary leading-relaxed mb-10">
+            Subconscious ships with a full suite of local tools out-of-the-box. Manage access natively inside Settings —
+            grant or revoke permissions per tool, per agent thread.
+          </p>
+          <ul class="space-y-5">
+            {% for icon, name, desc in [
+            ("terminal", "Terminal", "Execute shell commands directly from the chat interface."),
+            ("folder_open", "FileSystem", "Read, write, and navigate your local filesystem."),
+            ("calculate", "Calculator", "Precise math and unit conversions on-the-fly."),
+            ("content_paste", "Clipboard", "Read from and write to your system clipboard."),
+            ("contacts", "Contacts", "Query and manage your local contacts."),
+            ("schedule", "Time", "Timezone-aware date and time operations."),
+            ("cloud", "Weather", "Live weather lookups without a third-party app."),
+            ("language", "Web Tools", "Search, fetch, and summarize live web content.")
+            ] %}
+            <li class="flex gap-4 items-start">
+              <span class="material-symbols-outlined text-primary text-xl mt-0.5 flex-shrink-0">{{ icon }}</span>
+              <div>
+                <span class="font-bold">{{ name }}</span>
+                <span class="text-secondary text-sm ml-2">{{ desc }}</span>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <!-- Threads & Workspaces -->
+        <div class="space-y-6">
+          <div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-8">
+            <span class="material-symbols-outlined text-3xl mb-4 block">account_tree</span>
+            <h3 class="text-xl font-bold mb-3">Agentic Threads</h3>
+            <p class="text-secondary leading-relaxed">Create varied threads and agents for distinct purposes. Assign
+              specific tools and fine-tune context effortlessly — each thread can have its own model, persona, and
+              toolset.</p>
+          </div>
+          <div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-8">
+            <span class="material-symbols-outlined text-3xl mb-4 block">folder_special</span>
+            <h3 class="text-xl font-bold mb-3">Workspaces</h3>
+            <p class="text-secondary leading-relaxed">Keep organized. Compartmentalize your threads by workspace for
+              related themes — Work, Personal, or a special side-project. Switch context instantly.</p>
+          </div>
+          <div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-8">
+            <span class="material-symbols-outlined text-3xl mb-4 block">alarm_on</span>
+            <h3 class="text-xl font-bold mb-3">To-Dos &amp; Scheduled Tasks</h3>
+            <p class="text-secondary leading-relaxed">Delegate routine chores. Let your agent maintain a to-do list or
+              schedule tasks for exact execution times — it runs them automatically.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Feature: Multi-Platform ─────────────────────────────────────────── -->
+  <section class="px-8 max-w-[1440px] mx-auto mb-40">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+      <div class="md:col-span-6">
+        <span
+          class="text-[0.6875rem] uppercase tracking-[0.05em] text-neutral-400 block mb-6 font-bold">Distribution</span>
+        <h2 class="text-[2rem] font-bold mb-6">As ubiquitous<br />as you are.</h2>
+        <p class="text-secondary leading-relaxed mb-8">
+          Subconscious is designed to follow you everywhere. Use your phone to execute a process on your VPS, or operate
+          in your terminal while browsing. Start on one device, continue from another.
+        </p>
+        <div class="grid grid-cols-2 gap-4">
+          {% for platform, status, icon in [
+          ("Windows", "Available now", "check_circle"),
+          ("Python / CLI", "Available now", "check_circle"),
+          ("Web", "Coming soon", "pending"),
+          ("Linux", "Coming soon", "pending"),
+          ("macOS", "Coming soon", "pending"),
+          ("Android & iOS", "Coming soon", "pending")
+          ] %}
+          <div class="flex items-center gap-3 p-4 bg-surface-container-low rounded-lg">
+            <span
+              class="material-symbols-outlined text-lg {% if 'now' in status %}text-primary{% else %}text-neutral-400{% endif %}">{{
+              icon }}</span>
+            <div>
+              <p class="font-bold text-sm">{{ platform }}</p>
+              <p class="text-xs text-secondary">{{ status }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="md:col-span-6 bg-black text-white rounded-xl p-10 font-mono text-sm space-y-3">
+        <p class="text-neutral-500"># Windows — fastest install</p>
+        <p><span class="text-neutral-500">$</span> winget install Ancilla.Subconscious-Chat</p>
+        <p class="text-neutral-500 pt-4"># Mac / Linux / Python</p>
+        <p><span class="text-neutral-500">$</span> pip install -U subconscious-chat</p>
+        <p class="text-neutral-500 pt-4"># From source</p>
+        <p><span class="text-neutral-500">$</span> git clone https://github.com/Ancilla-Company/Subconscious.git</p>
+        <p><span class="text-neutral-500">$</span> cd Subconscious &amp;&amp; pip install -e .</p>
+        <p><span class="text-neutral-500">$</span> subconscious</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Roadmap ──────────────────────────────────────────────────────────── -->
+  <section class="px-8 max-w-[1440px] mx-auto mb-40">
+    <div class="mb-20">
+      <h2 class="text-[3.5rem] font-black tracking-tighter mb-2">Roadmap.</h2>
+      <div class="w-20 h-2 bg-primary"></div>
+    </div>
+    <div class="space-y-0 border-l border-outline-variant/30 ml-4">
+
+      <!-- Shipped -->
+      <div class="relative pl-12 pb-24">
+        <div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-neutral-300"></div>
+        <span class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-neutral-400 block mb-2">Shipped —
+          v0.1.x</span>
+        <h3 class="text-xl font-bold mb-4 opacity-50">Foundation</h3>
+        <ul class="text-secondary space-y-2 opacity-50">
+          <li>• Local-first architecture — all data on device</li>
+          <li>• Ollama integration for 100% offline inference</li>
+          <li>• BYOK support — OpenAI, Anthropic, Google, DeepSeek, Groq, Grok, Hugging Face</li>
+          <li>• Built-in tool suite (Terminal, FileSystem, Calculator, Clipboard, Contacts, Time, Weather, Web)</li>
+          <li>• Agentic Threads &amp; Workspaces</li>
+          <li>• To-Dos &amp; Scheduled Task execution</li>
+          <li>• Windows native app + pip package + winget</li>
+          <li>• Auto-updates</li>
+        </ul>
+      </div>
+
+      <!-- Active -->
+      <div class="relative pl-12 pb-24">
+        <div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-primary ring-8 ring-background"></div>
+        <span class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-primary block mb-2">Active — Shipping
+          Fast</span>
+        <h3 class="text-xl font-bold mb-4">Expansion Phase</h3>
+        <p class="text-secondary mb-6 max-w-lg">Broadening platform reach, tools, and model coverage.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl">
+          {% for label, item in [
+          ("IN PROGRESS", "True Multi-Platform — Web, Linux, macOS, Android, iOS"),
+          ("IN PROGRESS", "Custom & External Tools — extend via Python, connect any API"),
+          ("IN PROGRESS", "More Models — expanding integrations as fast as possible")
+          ] %}
+          <div class="p-4 bg-surface-container-low border-l-2 border-primary rounded-r-lg">
+            <span class="text-xs font-bold text-primary block mb-1">{{ label }}</span>
+            <p class="text-sm">{{ item }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Planned -->
+      <div class="relative pl-12">
+        <div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full border-2 border-neutral-400 bg-background"></div>
+        <span class="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-neutral-400 block mb-2">Planned</span>
+        <h3 class="text-xl font-bold mb-4">Next Horizon</h3>
+        <ul class="text-secondary space-y-2 max-w-lg">
+          <li>• <strong>Swarm Access</strong> — start on one device, continue seamlessly from another</li>
+          <li>• <strong>Voice Input</strong> — speak directly to Subconscious with accompanying output animations</li>
+          <li>• <strong>Computer Interaction Tools</strong> — mouse/keyboard control via computer-use agent protocols
+          </li>
+          <li>• <strong>Directory RAG</strong> — instantly query your local filesystem docs</li>
+          <li>• <strong>Mini Mode / Always-On-Top</strong> — persistent overlay while you research</li>
+          <li>• <strong>MCP Server Connections</strong> — next-gen integrations for extended memory and actions</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CTA ─────────────────────────────────────────────────────────────── -->
+  <section class="px-8 max-w-[1440px] mx-auto">
+    <div class="bg-primary text-on-primary p-20 text-center rounded-xl">
+      <h2 class="text-[2.5rem] font-black tracking-tighter mb-4">Start using Subconscious.</h2>
+      <p class="text-on-primary/60 mb-10 font-mono text-sm">Open source &mdash; BSD-3-Clause &mdash; v0.1.9</p>
+      <div class="flex flex-col md:flex-row justify-center gap-4">
+        <a href="https://github.com/Ancilla-Company/Subconscious/releases/latest"
+          class="bg-white text-black px-8 py-4 font-bold rounded-lg hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined" style="font-size:18px">download</span>
+          Download for Windows
+        </a>
+        <a href="https://github.com/Ancilla-Company/Subconscious"
+          class="border border-white/30 px-8 py-4 font-bold rounded-lg hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined" style="font-size:18px">code</span>
+          View on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+{% endblock %}

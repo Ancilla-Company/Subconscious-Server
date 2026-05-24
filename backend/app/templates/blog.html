@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}subconscious — Blog{% endblock %}
+
+{% block content %}
+<main class="pt-32 pb-24">
+
+  <!-- ── Header ─────────────────────────────────────────────────────────── -->
+  <header class="max-w-[1440px] mx-auto px-8 mb-24">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+      <div class="md:col-span-8">
+        <span class="text-[0.6875rem] font-mono text-neutral-400 tracking-[0.3em] uppercase mb-6 block">Dev Log</span>
+        <h1 class="text-[3.5rem] font-black tracking-tighter leading-[1.1] text-primary mb-8">
+          Building the distributed<br />agentic web.
+        </h1>
+      </div>
+      <div class="md:col-span-4 flex flex-col justify-end">
+        <p class="text-secondary text-[0.875rem] mb-4 max-w-sm leading-relaxed">
+          Engineering notes, release updates, and thinking out loud from the Subconscious core team.
+        </p>
+        <div class="h-px bg-surface-container-highest w-24"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Empty State ────────────────────────────────────────────────────── -->
+  <section class="max-w-[1440px] mx-auto px-8 mb-32">
+    <div class="border border-outline-variant/40 rounded-xl overflow-hidden">
+
+      <!-- Top bar — mimics a post header but signals "nothing here yet" -->
+      <div
+        class="bg-surface-container-lowest px-12 py-10 border-b border-outline-variant/30 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div class="flex items-center gap-4">
+          <span class="material-symbols-outlined text-3xl text-neutral-300">edit_note</span>
+          <div>
+            <p class="font-bold text-lg">No posts yet</p>
+            <p class="text-secondary text-sm">We ship code first. Words are next.</p>
+          </div>
+        </div>
+        <span class="text-[0.6875rem] font-mono text-neutral-400 tracking-widest uppercase">EST. 2026</span>
+      </div>
+
+      <!-- Body -->
+      <div class="bg-surface-container-low px-12 py-20 flex flex-col items-center text-center">
+        <!-- Minimal dot animation to fill visual space -->
+        <div class="flex gap-3 mb-12">
+          {% for _ in range(7) %}
+          <div class="w-1.5 h-1.5 rounded-full bg-neutral-300"
+            style="animation: pulse 1.8s ease-in-out {{ loop.index0 * 0.2 }}s infinite alternate;"></div>
+          {% endfor %}
+        </div>
+        <style>
+          @keyframes pulse {
+            from {
+              opacity: 0.2;
+              transform: scale(0.8);
+            }
+
+            to {
+              opacity: 1;
+              transform: scale(1.2);
+            }
+          }
+        </style>
+
+        <h2 class="text-3xl font-black tracking-tighter mb-4">Content incoming.</h2>
+        <p class="text-secondary max-w-md leading-relaxed mb-10">
+          The blog will document engineering decisions, release notes, and deep dives into how Subconscious is built.
+          Subscribe below to be notified when the first post drops.
+        </p>
+
+        <!-- Upcoming topics teaser -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-2xl text-left mb-10">
+          {% for topic, icon in [
+          ("Why we replaced Redis with LMDB", "swap_horiz"),
+          ("Running Llama 3 offline with Ollama", "offline_bolt"),
+          ("Designing agentic tool permissions", "tune")
+          ] %}
+          <div class="bg-surface-container-lowest border border-outline-variant/40 rounded-lg p-5">
+            <span class="material-symbols-outlined text-xl mb-3 block text-neutral-400">{{ icon }}</span>
+            <p class="text-sm font-medium text-on-surface leading-snug">{{ topic }}</p>
+            <span class="text-xs text-neutral-400 font-mono mt-2 block">coming soon</span>
+          </div>
+          {% endfor %}
+        </div>
+
+        <a href="https://github.com/Ancilla-Company/Subconscious"
+          class="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline">
+          <span class="material-symbols-outlined" style="font-size:16px">open_in_new</span>
+          Follow development on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Newsletter ─────────────────────────────────────────────────────── -->
+  <section class="max-w-[1440px] mx-auto px-8">
+    <div class="bg-surface-container-low py-24 px-12 rounded-xl flex flex-col items-center text-center">
+      <span class="text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-secondary mb-4">The Feed</span>
+      <h2 class="text-4xl font-black tracking-tighter mb-4 max-w-xl leading-[1.1]">Get notified when we publish.</h2>
+      <p class="text-secondary text-sm mb-10 max-w-sm">Release notes, engineering deep-dives, and roadmap updates —
+        straight to your inbox.</p>
+      <div class="flex flex-col sm:flex-row gap-0 w-full max-w-md overflow-hidden rounded-lg">
+        <input type="email" placeholder="your@email.com"
+          class="flex-grow bg-surface-container-lowest border border-outline-variant/40 border-r-0 py-4 px-6 focus:ring-0 text-[0.875rem] placeholder:text-neutral-400 rounded-l-lg" />
+        <button
+          class="bg-black text-white px-8 py-4 text-[0.875rem] font-bold uppercase tracking-widest hover:bg-neutral-800 transition-colors rounded-r-lg">
+          Subscribe
+        </button>
+      </div>
+    </div>
+  </section>
+
+</main>
+{% endblock %}

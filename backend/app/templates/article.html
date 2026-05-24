@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}subconscious - The Architecture of Neural Monoliths{% endblock %}
+
+{% block head_extra %}
+<style>
+  .prose-custom p {
+    margin-bottom: 2rem;
+    line-height: 1.8;
+    font-size: 1.125rem;
+    color: #1a1c1c;
+  }
+
+  .neural-diagram {
+    background-image: radial-gradient(#e2e2e2 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="pt-32 pb-24 px-8">
+  <article class="max-w-3xl mx-auto">
+    <!-- Editorial Header -->
+    <header class="mb-16">
+      <div class="flex items-center space-x-3 mb-6">
+        <span
+          class="bg-surface-container-highest px-2 py-1 text-[0.6875rem] font-bold tracking-[0.05em] uppercase rounded">Engineering</span>
+        <span class="text-secondary text-[0.875rem] tracking-tight">May 24, 2026</span>
+      </div>
+      <h1 class="text-[3.5rem] font-bold tracking-[-0.04em] leading-[1.1] mb-8 text-black">
+        The Architecture of Neural Monoliths
+      </h1>
+      <p class="text-xl text-on-secondary-container leading-relaxed font-light tracking-tight">
+        Exploring the intersection of high-density agentic workflows and the weightless interface of tomorrow's
+        technical ecosystems.
+      </p>
+    </header>
+
+    <!-- Hero Media -->
+    <div class="mb-16 rounded-xl overflow-hidden aspect-[16/9] bg-surface-container-low">
+      <img class="w-full h-full object-cover grayscale"
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFMmTrihdJKJIIVgZYfvMP6OUa3VYHU1_faX0dmvpzSvsKHdw9KZhWMtgRzvyHchCDSSlcoUD0t9XZ3AW27bYAQ2W4PYTLSpsNJvjWSeW8gtknhjucml-nL4nnbHy-IPA781Kn_Rn21QtByKlX8XJBcow-U_jv0lXDcgB3YMAywKFg7U2ddoavAOh-GD_KoDo8EQtnjnyFDbnzNQ3ZXHx7SGLKXP-d5brH2xy4YM7VkO4iDF96YYVkKvAwzY1XNosYdV4PpPNBww"
+        alt="" />
+    </div>
+
+    <!-- Content Canvas -->
+    <div class="prose-custom">
+      <p>
+        In the evolution of distributed systems, we often find ourselves at the crossroads of complexity and clarity.
+        The concept of the <strong>Neural Monolith</strong> isn't just a technical metaphor; it is a design imperative
+        for the next generation of agentic user interfaces.
+      </p>
+      <p>
+        Traditional dashboards treat data as a collection of isolated widgets. However, in an agent-driven world,
+        information is fluid, interconnected, and constantly shifting based on latent intent. This requires a "Technical
+        Breathe"—a commitment to expansive whitespace that allows the user to process complex machine outputs without
+        cognitive strain.
+      </p>
+
+      <!-- Technical Diagram Section -->
+      <div
+        class="my-16 p-12 neural-diagram border-t border-b border-outline-variant/20 flex flex-col items-center justify-center">
+        <div class="relative w-full max-w-lg aspect-square flex items-center justify-center">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <svg class="w-full h-full" fill="none" viewbox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="200" cy="200" r="160" stroke="black" stroke-dasharray="4 4" stroke-width="0.5"></circle>
+              <rect fill="black" height="40" width="40" x="180" y="20"></rect>
+              <rect fill="black" height="20" width="20" x="340" y="220"></rect>
+              <rect fill="black" height="30" width="30" x="40" y="180"></rect>
+              <path d="M200 60 L200 340 M60 200 L340 200" opacity="0.1" stroke="black" stroke-width="1"></path>
+              <circle cx="200" cy="200" fill="black" r="4"></circle>
+            </svg>
+          </div>
+          <div class="z-10 bg-white p-6 shadow-2xl border border-outline-variant/10 max-w-[240px] rounded-lg">
+            <span class="block text-[0.6875rem] font-bold tracking-widest uppercase mb-2">Node Cluster 01</span>
+            <p class="text-[0.875rem] text-secondary leading-snug">Asynchronous agent relay localized within the
+              monolith boundary.</p>
+          </div>
+        </div>
+        <span class="mt-8 text-[0.6875rem] text-secondary font-medium uppercase tracking-[0.1em]">Fig 1.0: Agentic
+          Latency Distribution</span>
+      </div>
+
+      <p>
+        The "No-Line" rule defined in our design system ensures that the monolith remains a single, cohesive entity.
+        Boundaries are not cages; they are tonal shifts. By using <code>surface-container-low</code> to differentiate
+        contexts, we maintain a weightless flow that mirrors the speed of the underlying neural models.
+      </p>
+
+      <!-- Code Snippet -->
+      <div class="my-12 bg-primary rounded-xl overflow-hidden shadow-xl">
+        <div class="px-6 py-3 border-b border-white/10 flex justify-between items-center">
+          <span class="text-white/40 text-[0.6875rem] font-mono tracking-wider uppercase">core_engine.sh</span>
+          <div class="flex space-x-1.5">
+            <div class="w-2 h-2 rounded-full bg-white/20"></div>
+            <div class="w-2 h-2 rounded-full bg-white/20"></div>
+          </div>
+        </div>
+        <pre class="p-8 overflow-x-auto"><code class="text-white font-mono text-[0.9rem] leading-relaxed">
+<span class="text-on-primary-container"># Initialize agentic subspace</span>
+initialize_monolith() {
+    export AGENT_THREADS=256
+    export LATENCY_THRESHOLD=12ms
+    
+    <span class="text-on-primary-container">// Deploying shards</span>
+    shards.map(node =&gt; {
+        return node.stabilize({
+            tonal_layering: true,
+            asymmetry_weight: 0.85
+        });
+    });
+}
+                </code></pre>
+      </div>
+
+      <p>
+        In summary, the future of the technical interface is not more color, but more clarity. The Subconscious blog
+        will continue to document this journey into the depths of minimalist, distributed design.
+      </p>
+    </div>
+
+    <!-- Footer of the Article -->
+    <footer class="mt-24 pt-12 border-t border-outline-variant/20">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center">
+            <span class="material-symbols-outlined text-primary">psychology</span>
+          </div>
+          <div>
+            <span class="block text-[0.875rem] font-bold">Subconscious Engineering</span>
+            <span class="text-[0.75rem] text-secondary">Technical Monolith Specialists</span>
+          </div>
+        </div>
+        <div class="flex space-x-4">
+          <button
+            class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant/30 hover:bg-surface-container-low transition-colors">
+            <span class="material-symbols-outlined text-[1.25rem]">share</span>
+          </button>
+        </div>
+      </div>
+    </footer>
+  </article>
+</main>
+{% endblock %}

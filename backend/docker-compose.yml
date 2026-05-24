@@ -1,0 +1,57 @@
+name: subconcious_website
+
+services:
+  # ── API ──────────────────────────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: subconscious-api:dev
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: development
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      APP_BASE_URL: http://localhost:8000
+      WEB_BASE_URL: http://localhost:3000
+      DOCS_BASE_URL: http://localhost:8001
+      APP_UI_BASE_URL: http://localhost:8550
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      OPENAI_CLIENT_ID: ${OPENAI_CLIENT_ID:-}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID:-}
+      TOKEN_ENCRYPTION_KEY: ${TOKEN_ENCRYPTION_KEY}
+      MICROSOFT_CLIENT_ID: ${MICROSOFT_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      OPENAI_CLIENT_SECRET: ${OPENAI_CLIENT_SECRET:-}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET:-}
+      APP_SECRET_KEY: dev-secret-key-32-chars-minimum!!
+      MICROSOFT_CLIENT_SECRET: ${MICROSOFT_CLIENT_SECRET:-}
+      DATABASE_URL: sqlite+aiosqlite:///./data/subconscious.db
+      CORS_ALLOWED_ORIGINS: '["http://localhost:3000","http://localhost:8550"]'
+    # SQLite + LMDB data persisted on a named volume
+    volumes:
+      - subconscious_data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/python3", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+
+  # Database and Redis are no longer separate services in single-container mode.
+
+  # ── Docs (MkDocs Material — dev serve only) ───────────────────────────────────
+  # docs:
+  #   image: squidfunk/mkdocs-material:latest
+  #   working_dir: /docs
+  #   volumes:
+  #     - ../docs-site:/docs
+  #   ports:
+  #     - "8001:8000"
+  #   command: serve --dev-addr=0.0.0.0:8000
+  #   profiles: ["docs"]   # run with: docker compose --profile docs up
+
+volumes:
+  subconscious_data:
+    driver: local
