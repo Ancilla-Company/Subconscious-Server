@@ -6,7 +6,7 @@
       "label": "Docker: Build",
       "type": "shell",
       "command": "docker build --target runtime -t subconscious-api:dev .",
-      "options": { "cwd": "${workspaceFolder}/backend" },
+      "options": { "cwd": "${workspaceFolder}" },
       "group": { "kind": "build", "isDefault": true },
       "presentation": { "reveal": "always", "panel": "shared" },
       "problemMatcher": []
@@ -25,7 +25,7 @@
         "--force-recreate",
         "-d"
       ],
-      "options": { "cwd": "${workspaceFolder}/backend" },
+      "options": { "cwd": "${workspaceFolder}" },
       "presentation": { "reveal": "always", "panel": "shared" },
       "problemMatcher": []
     },
@@ -35,7 +35,7 @@
       "label": "Docker: Compose Down",
       "type": "shell",
       "command": "docker compose down",
-      "options": { "cwd": "${workspaceFolder}/backend" },
+      "options": { "cwd": "${workspaceFolder}" },
       "presentation": { "reveal": "always", "panel": "shared" },
       "problemMatcher": []
     }

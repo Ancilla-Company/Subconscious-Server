@@ -1769,7 +1769,7 @@ wheels = [
 ]
 
 [[package]]
-name = "subconscious-backend"
+name = "subconscious-server"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

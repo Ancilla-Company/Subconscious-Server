@@ -1,8 +1,10 @@
 """FastAPI application factory."""
 from __future__ import annotations
 
+import os
 import structlog
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from fastapi.middleware.cors import CORSMiddleware
@@ -32,6 +34,11 @@ def create_app() -> FastAPI:
     openapi_url="/openapi.json",
   )
 
+  # ── Static files ──────────────────────────────────────────────────────────
+  static_dir = os.path.join(os.path.dirname(__file__), "static")
+  if os.path.exists(static_dir):
+    app.mount("/static", StaticFiles(directory=static_dir), name="static")
+
   # ── Rate limiting ─────────────────────────────────────────────────────────
   app.state.limiter = limiter
   app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)  # type: ignore[arg-type]
@@ -41,8 +48,8 @@ def create_app() -> FastAPI:
     app.add_middleware(
       TrustedHostMiddleware,
       allowed_hosts=[
-        "api.subconscious.chat",
         "subconscious.chat",
+        "api.subconscious.chat",
         "app.subconscious.chat",
         "docs.subconscious.chat",
       ],
