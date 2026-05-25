@@ -43,7 +43,7 @@ ENV PYTHONPATH=/app:/venv/lib/python3.12/site-packages \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-EXPOSE 8000
+EXPOSE 80
 
 # Create non-root user, ensure the data directory exists for SQLite + LMDB,
 # and hand ownership of /app and /venv to the unprivileged user.
