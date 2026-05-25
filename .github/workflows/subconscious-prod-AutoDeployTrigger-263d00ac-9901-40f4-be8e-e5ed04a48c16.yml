@@ -1,4 +1,4 @@
-name: Trigger auto deployment for subconscious-prod
+name: Trigger auto deployment for subconscious-server
 
 # When this action will be executed
 on:
@@ -33,7 +33,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set lowercase image name
-        run: echo "IMAGE=ghcr.io/$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')/subconscious-prod:${{ github.sha }}" >> $GITHUB_ENV
+        run: echo "IMAGE=ghcr.io/$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')/subconscious-server:${{ github.sha }}" >> $GITHUB_ENV
 
       - name: Build and push image to GHCR
         uses: docker/build-push-action@v5
