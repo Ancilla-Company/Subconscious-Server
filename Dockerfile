@@ -43,7 +43,7 @@ ENV PYTHONPATH=/app:/venv/lib/python3.12/site-packages \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-EXPOSE 80
+EXPOSE 8000
 
 # Create non-root user, ensure the data directory exists for SQLite + LMDB,
 # and hand ownership of /app and /venv to the unprivileged user.
@@ -54,7 +54,7 @@ RUN groupadd -g 1000 appuser || true && useradd -u 1000 -g 1000 -m appuser || tr
 USER appuser
 
 ENTRYPOINT ["/venv/bin/python3", "-m", "uvicorn", "app.main:app", \
-            "--host", "0.0.0.0", "--port", "80", \
+            "--host", "0.0.0.0", "--port", "8000", \
             "--workers", "1", \
             "--loop", "uvloop", \
             "--http", "httptools", \
