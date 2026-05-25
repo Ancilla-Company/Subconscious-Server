@@ -54,7 +54,7 @@ RUN groupadd -g 1000 appuser || true && useradd -u 1000 -g 1000 -m appuser || tr
 USER appuser
 
 ENTRYPOINT ["/venv/bin/python3", "-m", "uvicorn", "app.main:app", \
-            "--host", "0.0.0.0", "--port", "8000", \
+            "--host", "0.0.0.0", "--port", "80", \
             "--workers", "1", \
             "--loop", "uvloop", \
             "--http", "httptools", \

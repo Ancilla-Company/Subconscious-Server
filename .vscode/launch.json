@@ -13,11 +13,11 @@
         "--port", "8080",
         "--log-level", "debug"
       ],
-      "cwd": "${workspaceFolder}/backend",
-      "envFile": "${workspaceFolder}/backend/.env",
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}/.env",
       "env": {
         "APP_ENV": "development",
-        "PYTHONPATH": "${workspaceFolder}/backend"
+        "PYTHONPATH": "${workspaceFolder}"
       },
       "jinja": true,
       "justMyCode": true
